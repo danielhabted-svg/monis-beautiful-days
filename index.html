@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moni's Beautiful Days</title>
+  <meta name="theme-color" content="#e96d8a" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Moni's Beautiful Days" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon-192.png" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{background:#fff8f6;color:#2d2426;padding-bottom:90px}
+    header{padding:30px 20px 20px;background:linear-gradient(135deg,#ffd6df,#fff1f4);border-bottom-left-radius:30px;border-bottom-right-radius:30px}
+    .logo{font-size:1.8rem;font-weight:900;margin-bottom:6px}
+    .subtitle{color:#6f5a60;line-height:1.45;font-size:.95rem}
+    main{padding:20px}.page{display:none}.page.active{display:block}
+    .hero,.card{background:white;border-radius:24px;padding:18px;box-shadow:0 8px 24px rgba(120,70,80,.08);margin-bottom:18px}
+    .hero{border-radius:28px;padding:22px}.hero h1{font-size:1.65rem;margin-bottom:8px}.hero p{color:#705b61;line-height:1.5;margin-bottom:10px}
+    .love{color:#d95b78;font-weight:800;margin-top:8px}
+    h2{font-size:1.2rem;margin-bottom:14px}h3{font-size:1rem;margin-bottom:10px}
+    label{display:block;font-size:.85rem;margin:12px 0 6px;color:#604b51;font-weight:700}
+    input,select,textarea{width:100%;border:1px solid #f1cbd3;border-radius:14px;padding:12px;background:#fffafb;font-size:1rem;outline:none}
+    textarea{min-height:80px;resize:vertical}
+    button{border:none;border-radius:16px;padding:13px 16px;font-weight:800;font-size:.94rem;cursor:pointer}
+    .primary{width:100%;background:#e96d8a;color:white;margin-top:14px}.secondary{width:100%;background:#fff0f4;color:#d95b78;margin-top:10px}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}.stat{background:#fff0f4;border-radius:18px;padding:15px;text-align:center}
+    .stat strong{display:block;font-size:1.35rem;color:#d95b78}.stat span{font-size:.78rem;color:#705b61}
+    .filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}.check{display:flex;align-items:center;gap:8px;margin:10px 0;color:#604b51;font-weight:700;font-size:.9rem}.check input{width:auto}
+    .quickfilters{display:flex;gap:10px;overflow-x:auto;margin-bottom:18px;padding-bottom:5px}.filter-btn{background:white;color:#76545c;white-space:nowrap;border:1px solid #f0ccd3}.filter-btn.active{background:#e96d8a;color:white;border-color:#e96d8a}
+    .gallery{display:grid;grid-template-columns:1fr;gap:16px}.outfit{background:white;border-radius:22px;overflow:hidden;box-shadow:0 8px 24px rgba(120,70,80,.08)}
+    .outfit img{width:100%;height:265px;object-fit:cover;background:#f6dfe4}.outfit-content{padding:15px}
+    .tag{display:inline-block;background:#ffe8ed;color:#b94d66;padding:6px 10px;border-radius:999px;font-size:.78rem;margin-right:6px;margin-bottom:8px;font-weight:800}
+    .note,.meta{margin-top:8px;color:#6b555b;font-size:.92rem;line-height:1.4}.meta{font-size:.82rem;color:#8a7077}
+    .stars{font-size:1.15rem;letter-spacing:2px;margin:8px 0;color:#d95b78}.star-choice{display:flex;gap:6px;margin-top:8px}.star-choice button{background:#fff0f4;color:#d95b78;padding:9px 10px}
+    .favorite{margin-top:10px;background:#fff0f4;color:#d95b78;width:100%}.favorite.active{background:#d95b78;color:white}
+    .empty{text-align:center;color:#7d656c;padding:28px 10px;line-height:1.5}.picked-box{margin-top:16px}
+    nav{position:fixed;bottom:0;left:0;right:0;height:72px;background:white;display:flex;justify-content:space-around;align-items:center;box-shadow:0 -8px 24px rgba(120,70,80,.1);border-top-left-radius:24px;border-top-right-radius:24px;z-index:999}
+    nav button{background:transparent;color:#8a7077;font-size:.76rem;padding:8px}nav button.active{color:#e96d8a;font-weight:900}
+
+    .clean-logo{
+      width:100%;
+      max-width:330px;
+      margin:0 auto 14px;
+      background:#fff8f6;
+      border-radius:28px;
+      padding:6px;
+      box-shadow:0 10px 28px rgba(120,70,80,.12);
+    }
+    .clean-logo svg{
+      width:100%;
+      display:block;
+    }
+    .visually-small{
+      text-align:center;
+      font-size:1.1rem;
+      margin-top:4px;
+    }
+
+    @media(min-width:650px){body{max-width:480px;margin:auto}}
+  </style>
+</head>
+<body>
+<header>
+  
+<div class="clean-logo" aria-label="Moni's Beautiful Days logo">
+  <svg viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="heartGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#f8a9b8"/>
+        <stop offset="100%" stop-color="#d96c8c"/>
+      </linearGradient>
+    </defs>
+    <rect x="8" y="8" width="344" height="244" rx="32" fill="#fff8f6"/>
+    <path d="M180 218 C110 156 58 116 66 72 C72 39 114 28 145 58 C160 72 170 88 180 104 C190 88 200 72 215 58 C246 28 288 39 294 72 C302 116 250 156 180 218Z"
+      fill="none" stroke="url(#heartGrad)" stroke-width="7" stroke-linecap="round"/>
+    <text x="180" y="118" text-anchor="middle" font-size="54" font-family="Brush Script MT, Snell Roundhand, cursive" fill="#d96c8c">Moni’s</text>
+    <text x="180" y="157" text-anchor="middle" font-size="24" letter-spacing="4" font-family="Georgia, serif" fill="#b9792b">BEAUTIFUL</text>
+    <text x="180" y="187" text-anchor="middle" font-size="24" letter-spacing="4" font-family="Georgia, serif" fill="#b9792b">DAYS</text>
+    <text x="180" y="213" text-anchor="middle" font-size="25" fill="#b9792b">♡</text>
+    <circle cx="270" cy="155" r="5" fill="#f8a9b8"/>
+    <circle cx="288" cy="145" r="3" fill="#e6c27a"/>
+    <circle cx="252" cy="170" r="3" fill="#e6c27a"/>
+  </svg>
+</div>
+<div class="logo visually-small">Moni’s Beautiful Days</div>
+  <p class="subtitle">Every outfit tells a story. Save her favorite looks and the beautiful memories that come with them.</p>
+</header>
+
+<main>
+  <section id="homePage" class="page active">
+    <div class="hero">
+      <h1>Moni’s Beautiful Days ✨</h1>
+      <p>A private romantic style journal for Moni’s outfits, memories and favorite moments.</p>
+      <p class="love">Made with love for Moni ❤️</p>
+      <button class="primary" data-page="addPage">Add a Beautiful Look</button>
+      <button class="secondary" onclick="smartPick('any','pickedHome')">🎲 Pick Any Outfit</button>
+      <button class="secondary" onclick="smartPick('date','pickedHome')">❤️ Pick a Date Night Outfit</button>
+      <button class="secondary" onclick="smartPick('five','pickedHome')">⭐ Pick a 5-Star Outfit</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><strong id="totalCount">0</strong><span>Looks Saved</span></div>
+      <div class="stat"><strong id="favCount">0</strong><span>Favorites</span></div>
+      <div class="stat"><strong id="mostWorn">—</strong><span>Most Worn</span></div>
+      <div class="stat"><strong id="favOccasion">—</strong><span>Favorite Occasion</span></div>
+    </div>
+    <div id="pickedHome" class="picked-box"></div>
+  </section>
+
+  <section id="addPage" class="page">
+    <div class="card">
+      <h2>Add a Beautiful Look</h2>
+      <label>Photo of Moni’s Outfit</label><input type="file" id="photoInput" accept="image/*">
+      <label>Occasion</label><select id="occasionInput"><option>Date Night</option><option>Party</option><option>Restaurant</option><option>Work</option><option>School</option><option>Wedding</option><option>Vacation</option><option>Sport</option></select>
+      <label>Season</label><select id="seasonInput"><option>Spring</option><option>Summer</option><option>Autumn</option><option>Winter</option><option>All Season</option></select>
+      <label>Style</label><select id="styleInput"><option>Chic</option><option>Casual</option><option>Streetwear</option><option>Elegant</option><option>Minimal</option><option>Sporty</option></select>
+      <label>Rating</label><select id="ratingInput"><option value="5">★★★★★</option><option value="4">★★★★☆</option><option value="3">★★★☆☆</option><option value="2">★★☆☆☆</option><option value="1">★☆☆☆☆</option></select>
+      <label>Memory of the Day ❤️</label><textarea id="noteInput" placeholder="Example: Our dinner together, sunny day by the lake, birthday celebration..."></textarea>
+      <button class="primary" id="saveBtn">Save This Memory</button>
+    </div>
+  </section>
+
+  <section id="findPage" class="page">
+    <h2>Find My Look 🔍</h2>
+    <div class="card">
+      <div class="filters">
+        <div><label>Occasion</label><select id="filterOccasion"><option>All</option></select></div>
+        <div><label>Season</label><select id="filterSeason"><option>All</option><option>Spring</option><option>Summer</option><option>Autumn</option><option>Winter</option><option>All Season</option></select></div>
+        <div><label>Style</label><select id="filterStyle"><option>All</option><option>Chic</option><option>Casual</option><option>Streetwear</option><option>Elegant</option><option>Minimal</option><option>Sporty</option></select></div>
+        <div><label>Rating</label><select id="filterRating"><option value="0">All</option><option value="5">★★★★★</option><option value="4">★★★★+</option><option value="3">★★★+</option></select></div>
+      </div>
+      <label class="check"><input type="checkbox" id="filterFav"> Favorites only</label>
+      <button class="primary" onclick="renderSearch()">Search Looks</button>
+    </div>
+    <div class="gallery" id="searchGallery"></div>
+  </section>
+
+  <section id="journalPage" class="page">
+    <h2>Moni’s Journal</h2>
+    <div class="quickfilters" id="quickFilters"></div>
+    <button class="secondary" onclick="smartPick('filtered','pickedJournal')">🎲 Pick from Journal</button>
+    <button class="secondary" onclick="smartPick('summer','pickedJournal')">🌸 Pick a Summer Outfit</button>
+    <div id="pickedJournal" class="picked-box"></div>
+    <div class="gallery" id="journalGallery"></div>
+  </section>
+
+  <section id="favoritesPage" class="page">
+    <h2>Moni’s Favorites ❤️</h2>
+    <button class="secondary" onclick="smartPick('favorites','pickedFavorite')">🎲 Pick a Favorite Outfit</button>
+    <div id="pickedFavorite" class="picked-box"></div>
+    <div class="gallery" id="favoritesGallery"></div>
+  </section>
+</main>
+
+<nav>
+  <button class="active" data-page="homePage">Home</button>
+  <button data-page="addPage">Add</button>
+  <button data-page="findPage">Find</button>
+  <button data-page="journalPage">Journal</button>
+  <button data-page="favoritesPage">Favorites</button>
+</nav>
+
+<script>
+let outfits=[];let currentQuick="All";
+function load(){try{outfits=JSON.parse(localStorage.getItem("monisBeautifulDaysV3"))||[]}catch(e){outfits=[]}}
+function save(){localStorage.setItem("monisBeautifulDaysV3",JSON.stringify(outfits));updateStats();populateFilters()}
+function stars(n){n=Number(n)||0;return "★★★★★".slice(0,n)+"☆☆☆☆☆".slice(0,5-n)}
+function dateFmt(s){return new Date(s||Date.now()).toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"})}
+function updateStats(){
+ document.getElementById("totalCount").textContent=outfits.length;
+ document.getElementById("favCount").textContent=outfits.filter(o=>o.favorite).length;
+ let mw=outfits.length?[...outfits].sort((a,b)=>(b.wornCount||1)-(a.wornCount||1))[0]:null;
+ document.getElementById("mostWorn").textContent=mw?(mw.wornCount||1)+"x":"—";
+ let counts={};outfits.forEach(o=>counts[o.occasion]=(counts[o.occasion]||0)+1);
+ let best=Object.entries(counts).sort((a,b)=>b[1]-a[1])[0];
+ document.getElementById("favOccasion").textContent=best?best[0]:"—";
+}
+function showPage(id){
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+ document.getElementById(id).classList.add("active");
+ document.querySelectorAll("nav button").forEach(b=>{b.classList.toggle("active",b.dataset.page===id)});
+ if(id==="journalPage")renderJournal(); if(id==="favoritesPage")renderFavorites(); if(id==="findPage")renderSearch();
+}
+function addOutfit(){
+ const file=document.getElementById("photoInput").files[0]; if(!file){alert("Please add an outfit photo first.");return}
+ const r=new FileReader(); r.onload=e=>{
+  const now=new Date().toISOString();
+  outfits.unshift({id:Date.now(),photo:e.target.result,occasion:occasionInput.value,season:seasonInput.value,style:styleInput.value,rating:Number(ratingInput.value),note:noteInput.value,favorite:false,createdAt:now,lastWorn:now,wornCount:1});
+  save(); photoInput.value=""; noteInput.value=""; showPage("journalPage");
+ }; r.readAsDataURL(file);
+}
+function populateFilters(){
+ const occ=["All",...new Set(outfits.map(o=>o.occasion))];
+ filterOccasion.innerHTML=occ.map(o=>`<option>${o}</option>`).join("");
+}
+function quickFiltered(){return outfits.filter(o=>currentQuick==="All"||o.occasion===currentQuick)}
+function renderQuick(){
+ const occ=["All",...new Set(outfits.map(o=>o.occasion))]; quickFilters.innerHTML="";
+ occ.forEach(o=>{let b=document.createElement("button");b.textContent=o;b.className="filter-btn"+(o===currentQuick?" active":"");b.onclick=()=>{currentQuick=o;renderJournal()};quickFilters.appendChild(b)})
+}
+function renderJournal(){renderQuick();renderList("journalGallery",quickFiltered(),"No looks saved yet.")}
+function renderFavorites(){renderList("favoritesGallery",outfits.filter(o=>o.favorite),"No favorite looks yet.")}
+function renderSearch(){
+ let list=outfits.filter(o=>{
+  let ok=true;
+  if(filterOccasion.value!=="All")ok=ok&&o.occasion===filterOccasion.value;
+  if(filterSeason.value!=="All")ok=ok&&o.season===filterSeason.value;
+  if(filterStyle.value!=="All")ok=ok&&o.style===filterStyle.value;
+  if(Number(filterRating.value)>0)ok=ok&&Number(o.rating)>=Number(filterRating.value);
+  if(filterFav.checked)ok=ok&&o.favorite;
+  return ok;
+ });
+ renderList("searchGallery",list,"No look matches these filters.");
+}
+function renderList(id,list,empty){
+ const g=document.getElementById(id);g.innerHTML="";
+ if(!list.length){g.innerHTML=`<div class="empty">${empty}</div>`;return}
+ list.forEach(o=>g.appendChild(card(o)));
+}
+function card(o){
+ const c=document.createElement("div");c.className="outfit";
+ c.innerHTML=`<img src="${o.photo}" alt="Outfit photo"><div class="outfit-content">
+ <span class="tag">${o.occasion}</span><span class="tag">${o.season||"All Season"}</span><span class="tag">${o.style}</span>
+ <div class="stars">${stars(o.rating||5)}</div>
+ <p class="note">${o.note||"No memory added yet."}</p>
+ <p class="meta">Added: ${dateFmt(o.createdAt)} · Last worn: ${dateFmt(o.lastWorn)} · Worn ${o.wornCount||1} time${(o.wornCount||1)>1?"s":""}</p>
+ <button class="secondary" onclick="wearAgain(${o.id})">Wear Again</button>
+ <button class="favorite ${o.favorite?"active":""}" onclick="toggleFav(${o.id})">${o.favorite?"★ Favorite":"☆ Add to Favorites"}</button>
+ </div>`;
+ return c;
+}
+function toggleFav(id){outfits=outfits.map(o=>o.id===id?{...o,favorite:!o.favorite}:o);save();renderJournal();renderFavorites();renderSearch()}
+function wearAgain(id){outfits=outfits.map(o=>o.id===id?{...o,wornCount:(o.wornCount||1)+1,lastWorn:new Date().toISOString()}:o);save();renderJournal();renderFavorites();renderSearch();alert("Look marked as worn again ✨")}
+function smartPick(type,targetId){
+ let list=[];
+ if(type==="any")list=outfits;
+ if(type==="filtered")list=quickFiltered();
+ if(type==="favorites")list=outfits.filter(o=>o.favorite);
+ if(type==="date")list=outfits.filter(o=>o.occasion==="Date Night");
+ if(type==="summer")list=outfits.filter(o=>o.season==="Summer");
+ if(type==="five")list=outfits.filter(o=>Number(o.rating)===5);
+ const t=document.getElementById(targetId);t.innerHTML="";
+ if(!list.length){t.innerHTML='<div class="empty">No outfit available for this pick yet.</div>';return}
+ const pick=list[Math.floor(Math.random()*list.length)];
+ t.innerHTML="<h3>Today’s pick ✨</h3>";t.appendChild(card(pick));
+}
+document.addEventListener("DOMContentLoaded",()=>{
+ load();updateStats();populateFilters();renderJournal();renderFavorites();renderSearch();
+ document.querySelectorAll("[data-page]").forEach(b=>b.onclick=()=>showPage(b.dataset.page));
+ saveBtn.onclick=addOutfit;
+});
+</script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function() {
+    navigator.serviceWorker.register("./service-worker.js");
+  });
+}
+</script>
+</body>
+
+</html>
