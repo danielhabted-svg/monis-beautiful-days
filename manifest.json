@@ -1,10 +1,10 @@
 {
   "name": "Moni's Beautiful Days",
-  "short_name": "Beautiful Days",
+  "short_name": "Moni",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#fff8f6",
-  "theme_color": "#e96d8a",
+  "background_color": "#F8EFE8",
+  "theme_color": "#4D2C36",
   "description": "A private romantic outfit journal made with love for Moni.",
   "icons": [
     {
